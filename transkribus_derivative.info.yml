@@ -1,0 +1,9 @@
+name: Transkribus Derivative
+description: Islandora module for connecting to the transkribus-process microservice for HTR
+package: Custom
+
+type: module
+core_version_requirement: ^8 || ^9 || ^10
+
+dependencies:
+  - drupal:islandora
