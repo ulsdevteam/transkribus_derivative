@@ -8,7 +8,7 @@ use Drupal\islandora\Plugin\Action\AbstractGenerateDerivative;
 /**
  * 
  */
-class GenerateTranskribusHOCRDerivative extends AbstractGenerateDerivative {
+class GenerateTranskribusHOCRDerivativeFile extends AbstractGenerateDerivativeMediaFile {
     public function default_configuration() {
         $config = parent::defaultConfiguration();
         $config['path'] = '[date:custom:Y]-[date:custom:m]/[node:nid]-[term:name].shtml';
