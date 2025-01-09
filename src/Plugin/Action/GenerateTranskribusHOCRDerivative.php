@@ -1,15 +1,19 @@
 <?php
 
-namespace Drupal/transkribus_derivative/Plugin/Action;
+namespace Drupal\transkribus_derivative\Plugin\Action;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\islandora\Plugin\Action\AbstractGenerateDerivative;
 
 /**
- * 
+ * @Action(
+ *   id = "generate_transkribus_hocr_derivative",
+ *   label = @Translation("Generate Transkribus HOCR Derivative"),
+ *   type = "node"
+ * )
  */
 class GenerateTranskribusHOCRDerivative extends AbstractGenerateDerivative {
-    public function default_configuration() {
+    public function defaultConfiguration() {
         $config = parent::defaultConfiguration();
         $config['path'] = '[date:custom:Y]-[date:custom:m]/[node:nid]-[term:name].shtml';
         $config['event'] = 'Generate Transkribus HOCR Derivative';
@@ -26,7 +30,12 @@ class GenerateTranskribusHOCRDerivative extends AbstractGenerateDerivative {
     public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
         $form = parent::buildConfigurationForm($form, $form_state);
         $form['args']['#description'] = $this->t("Additional arguments to send to Transkribus microservice");
-        $form['htrid']['#description'] = $this->t("ID of Transkribus HTR model")
+        $form['htrid'] = [
+            '#title' => $this->t("HTR ID"),
+            '#type' => 'textfield',
+            '#required' => true,
+            '#description' => $this->t("ID of Transkribus HTR model")
+        ];
         return $form;
     }
 }
