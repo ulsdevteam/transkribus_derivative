@@ -2,6 +2,7 @@
 
 namespace Drupal\transkribus_derivative\Plugin\Action;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\islandora\Plugin\Action\AbstractGenerateDerivativeMediaFile;
 
