@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+name: 'Transkribus HTR Models'
+vid: transkribus_htr_models
+description: 'Contains configuration settings for Transkribus HTR'
+weight: 0
+new_revision: false

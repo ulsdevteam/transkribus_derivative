@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.transkribus_htr_models
+  module:
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+id: taxonomy_term.transkribus_htr_models
+target_entity_type_id: taxonomy_term
+target_bundle: transkribus_htr_models
+default_langcode: site_default
+language_alterable: false

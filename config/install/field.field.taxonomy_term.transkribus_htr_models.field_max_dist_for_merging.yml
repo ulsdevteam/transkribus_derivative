@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_max_dist_for_merging
+    - taxonomy.vocabulary.transkribus_htr_models
+  module:
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+id: taxonomy_term.transkribus_htr_models.field_max_dist_for_merging
+field_name: field_max_dist_for_merging
+entity_type: taxonomy_term
+bundle: transkribus_htr_models
+label: 'Max Distance for Merging'
+description: 'The maximal distance between two baselines to be merged.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

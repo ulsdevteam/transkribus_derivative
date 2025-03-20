@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_minimal_baseline_length
+    - taxonomy.vocabulary.transkribus_htr_models
+  module:
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+id: taxonomy_term.transkribus_htr_models.field_minimal_baseline_length
+field_name: field_minimal_baseline_length
+entity_type: taxonomy_term
+bundle: transkribus_htr_models
+label: 'Minimal Baseline Length'
+description: 'Minimal baseline length for the layout analysis - detected baselines below this length are dropped.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

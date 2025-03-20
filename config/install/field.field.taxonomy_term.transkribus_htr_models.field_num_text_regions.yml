@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_num_text_regions
+    - taxonomy.vocabulary.transkribus_htr_models
+  module:
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+id: taxonomy_term.transkribus_htr_models.field_num_text_regions
+field_name: field_num_text_regions
+entity_type: taxonomy_term
+bundle: transkribus_htr_models
+label: 'Number of Text Regions'
+description: 'Number of text regions. One: -1, Few: 1.6, Medium: 1.0, Many: 0.4'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

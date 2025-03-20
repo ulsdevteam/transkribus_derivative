@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - taxonomy
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: taxonomy_term.field_max_dist_for_merging
+field_name: field_max_dist_for_merging
+entity_type: taxonomy_term
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

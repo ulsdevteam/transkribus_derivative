@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_accuracy_threshold
+    - taxonomy.vocabulary.transkribus_htr_models
+  module:
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+id: taxonomy_term.transkribus_htr_models.field_accuracy_threshold
+field_name: field_accuracy_threshold
+entity_type: taxonomy_term
+bundle: transkribus_htr_models
+label: 'Baseline Accuracy Threshold'
+description: 'The threshold for binarization of the baseline mask images. Higher values enforce higher accuracy in the detected baselines.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 255
+  prefix: ''
+  suffix: ''
+field_type: integer

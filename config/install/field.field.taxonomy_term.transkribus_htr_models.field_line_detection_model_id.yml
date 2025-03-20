@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_line_detection_model_id
+    - taxonomy.vocabulary.transkribus_htr_models
+  module:
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+id: taxonomy_term.transkribus_htr_models.field_line_detection_model_id
+field_name: field_line_detection_model_id
+entity_type: taxonomy_term
+bundle: transkribus_htr_models
+label: 'Line Detection Model ID'
+description: 'ID of the Line Detection model. Transkribus will pick one automatically if one is not specified.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

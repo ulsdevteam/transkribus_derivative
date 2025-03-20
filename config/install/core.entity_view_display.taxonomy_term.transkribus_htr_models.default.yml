@@ -1,0 +1,88 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.transkribus_htr_models.field_accuracy_threshold
+    - field.field.taxonomy_term.transkribus_htr_models.field_htr_model_id
+    - field.field.taxonomy_term.transkribus_htr_models.field_line_detection_model_id
+    - field.field.taxonomy_term.transkribus_htr_models.field_max_dist_for_merging
+    - field.field.taxonomy_term.transkribus_htr_models.field_minimal_baseline_length
+    - field.field.taxonomy_term.transkribus_htr_models.field_num_text_regions
+    - taxonomy.vocabulary.transkribus_htr_models
+  module:
+    - text
+    - transkribus_derivative
+  enforced:
+    module:
+      - transkribus_derivative
+id: taxonomy_term.transkribus_htr_models.default
+targetEntityType: taxonomy_term
+bundle: transkribus_htr_models
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_accuracy_threshold:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_htr_model_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_line_detection_model_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_max_dist_for_merging:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_minimal_baseline_length:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_num_text_regions:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
