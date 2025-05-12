@@ -5,6 +5,7 @@ namespace Drupal\transkribus_derivative\Plugin\Action;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\islandora\Plugin\Action\AbstractGenerateDerivativeMediaFile;
+use Drupal\islandora\Exception\IslandoraDerivativeException;
 
 /**
  * @Action(
@@ -30,7 +31,7 @@ class GenerateTranskribusHOCRDerivativeFile extends AbstractGenerateDerivativeMe
         $form = parent::buildConfigurationForm($form, $form_state);
         unset($form['args']);
 
-        $taxonomy_fields = Drupal::entityTypeManager()->getStorage('field_storage_config')->loadByProperties([
+        $taxonomy_fields = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadByProperties([
             'type' => 'entity_reference',
             'settings' => [ 'target_type' => 'taxonomy_term' ],
         ]);
@@ -50,8 +51,32 @@ class GenerateTranskribusHOCRDerivativeFile extends AbstractGenerateDerivativeMe
 
     protected function generateData(EntityInterface $entity) {
         $data = parent::generateData($entity);
-        $model = $entity->get($this->configuration['transkribus_model_field'])->entity;
-        $data['args'] = 'page --htrid=' . $model->field_htr_model_id->value;
+        $model_field = end(explode('.', $this->configuration['transkribus_model_field']));
+        if ($entity->get($model_field)->isEmpty()) {
+            throw new IslandoraDerivativeException($entity->getTitle() . ' is missing a Transkribus HTR model.');
+        }
+        $model = $entity->get($model_field)->entity;
+        $data['args'] = 'page --HtrId=' . $model->get('field_htr_model_id')->getValue();
+        $accuracy_threshold = $model->get('field_accuracy_threshold');
+        if (!$accuracy_threshold->isEmpty()) {
+            $data['args'] .= ' BaselineAccuracyThreshold=' . $accuracy_threshold->getValue();
+        }
+        $line_detection_model = $model->get('field_line_detection_model_id');
+        if (!$line_detection_model->isEmpty()) {
+            $data['args'] .= ' LineDetectionModelId=' . $line_detection_model->getValue();
+        }
+        $max_dist_merging = $model->get('field_max_dist_for_merging');
+        if (!$max_dist_merging->isEmpty()) {
+            $data['args'] .= ' MaxDistForMerging=' . $max_dist_merging->getValue();
+        }
+        $min_baseline_length = $model->get('field_minimal_baseline_length');
+        if (!$min_baseline_length->isEmpty()) {
+            $data['args'] .= ' MinimalBaselineLength=' . $min_baseline_length->getValue(); 
+        }
+        $num_text_regions = $model->get('field_num_text_regions');
+        if (!$num_text_regions->isEmpty()) {
+            $data['args'] .= ' NumTextRegions=' . $num_text_regions->getValue();
+        }
         return $data;
     }
     
