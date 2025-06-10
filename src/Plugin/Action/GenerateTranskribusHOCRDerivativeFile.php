@@ -56,26 +56,26 @@ class GenerateTranskribusHOCRDerivativeFile extends AbstractGenerateDerivativeMe
             throw new IslandoraDerivativeException($entity->getTitle() . ' is missing a Transkribus HTR model.');
         }
         $model = $entity->get($model_field)->entity;
-        $data['args'] = 'page --HtrId=' . $model->get('field_htr_model_id')->getValue();
+        $data['args'] = 'page --htrid=' . $model->get('field_htr_model_id')->getValue();
         $accuracy_threshold = $model->get('field_accuracy_threshold');
         if (!$accuracy_threshold->isEmpty()) {
-            $data['args'] .= ' BaselineAccuracyThreshold=' . $accuracy_threshold->getValue();
+            $data['args'] .= ' baselineaccuracythreshold=' . $accuracy_threshold->getValue();
         }
         $line_detection_model = $model->get('field_line_detection_model_id');
         if (!$line_detection_model->isEmpty()) {
-            $data['args'] .= ' LineDetectionModelId=' . $line_detection_model->getValue();
+            $data['args'] .= ' linedetectionmodelid=' . $line_detection_model->getValue();
         }
         $max_dist_merging = $model->get('field_max_dist_for_merging');
         if (!$max_dist_merging->isEmpty()) {
-            $data['args'] .= ' MaxDistForMerging=' . $max_dist_merging->getValue();
+            $data['args'] .= ' maxdistformerging=' . $max_dist_merging->getValue();
         }
         $min_baseline_length = $model->get('field_minimal_baseline_length');
         if (!$min_baseline_length->isEmpty()) {
-            $data['args'] .= ' MinimalBaselineLength=' . $min_baseline_length->getValue(); 
+            $data['args'] .= ' minimalbaselinelength=' . $min_baseline_length->getValue(); 
         }
         $num_text_regions = $model->get('field_num_text_regions');
         if (!$num_text_regions->isEmpty()) {
-            $data['args'] .= ' NumTextRegions=' . $num_text_regions->getValue();
+            $data['args'] .= ' numtextregions=' . $num_text_regions->getValue();
         }
         return $data;
     }
