@@ -225,7 +225,7 @@ class ConvertHOCRToPlaintext extends ConfigurableActionBase {
      */
     protected function extract_text($hocr_media) {
         $hocr_source_file = $this->media_source->getSourceFile($hocr_media);
-        $this->check_exists($hocr_source_file, "Could not locate source file for media {$hocr_media->id()}")
+        $this->check_exists($hocr_source_file, "Could not locate source file for media {$hocr_media->id()}");
         $hocr_file_uri = $this->utils->getDownloadUrl($hocr_source_file);
         $hocr_xml = new SimpleXMLElement($hocr_file_uri, 0, true);        
         // putToNode API requires the file contents as a stream
