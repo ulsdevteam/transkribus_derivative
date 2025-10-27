@@ -2,15 +2,18 @@
 
 namespace Drupal\transkribus_derivative\Plugin\Action;
 
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Action\ConfigurableActionBase;
-use Drupal\islandora\IslandoraUtils;
-use Drupal\islandora\MediaSource\MediaSourceService;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\token\TokenInterface;
+use Drupal\islandora\IslandoraUtils;
+use Drupal\islandora\MediaSource\MediaSourceService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @Action(
@@ -19,7 +22,7 @@ use Drupal\token\TokenInterface;
  *   type = "node"
  * )
  */
-class ConvertHOCRToPlaintext extends ConfigurableActionBase {
+class ConvertHOCRToPlaintext extends ConfigurableActionBase implements ContainerFactoryPluginInterface {
     
     /**
      * Islandora utility functions.
@@ -227,11 +230,12 @@ class ConvertHOCRToPlaintext extends ConfigurableActionBase {
         $hocr_source_file = $this->media_source->getSourceFile($hocr_media);
         $this->check_exists($hocr_source_file, "Could not locate source file for media {$hocr_media->id()}");
         $hocr_file_uri = $this->utils->getDownloadUrl($hocr_source_file);
-        $hocr_xml = new SimpleXMLElement($hocr_file_uri, 0, true);        
+        $hocr_xml = simplexml_load_file($hocr_file_uri);
+        $hocr_xml->registerXPathNamespace('ns', "http://www.w3.org/1999/xhtml");    
         // putToNode API requires the file contents as a stream
         $stream = fopen('php://temp' , 'r+');
-        foreach ($hocr_xml->xpath('//p') as $para) {
-            if (!$para->hasChildren()) {
+        foreach ($hocr_xml->xpath('//ns:p') as $para) {
+            if (empty($para->span)) {
                 continue;
             }
             foreach ($para->span as $line) {
@@ -289,5 +293,13 @@ class ConvertHOCRToPlaintext extends ConfigurableActionBase {
         if (!$object) {
             throw new \RuntimeException($message, 500);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function access($object, $account = NULL, $return_as_object = FALSE) {
+        $result = AccessResult::allowed();
+        return $return_as_object ? $result : $result->isAllowed();
     }
 }
