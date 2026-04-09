@@ -189,7 +189,7 @@ class ConvertHOCRToPlaintext extends ConfigurableActionBase implements Container
     /**
      * {@inheritdoc}
      */
-    public function execute($entity) {
+    public function execute($entity = NULL) {
         $hocr_term = $this->utils->getTermForUri($this->configuration['hocr_term_uri']);
         $this->check_exists($hocr_term, "Could not locate HOCR term with uri: " . $this->configuration['hocr_term_uri']);
         $hocr_media = $this->utils->getMediaWithTerm($entity, $hocr_term);
