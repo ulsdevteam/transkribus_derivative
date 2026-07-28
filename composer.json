@@ -1,0 +1,9 @@
+{
+  "name": "ulsdevteam/transkribus_derivative",
+  "type": "drupal-module-custom",
+  "description": "A Drupal module providing a custom Action to process media through Transkribus",
+  "keywords": ["Drupal"],
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
